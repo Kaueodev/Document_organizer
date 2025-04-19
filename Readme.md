@@ -1,27 +1,34 @@
-# 📁 Document Organizer
+# 📂 Document Organizer
 
-Organizador de arquivos feito em **Python**, que separa automaticamente os documentos em subpastas com base nas suas extensões. Ideal para quem deseja manter a organização de pastas no computador com apenas um comando simples.
+Organizador de documentos feito com **Python + Flask + HTML + CSS + JavaScript**.  
+Esse projeto organiza automaticamente arquivos de uma pasta, movendo-os para subpastas conforme suas extensões.
 
----
-
-## 🔧 Tecnologias utilizadas
-
-- [Python 3.x](https://www.python.org/)
-- [Rich](https://github.com/Textualize/rich) – Biblioteca para tornar o terminal mais bonito e interativo
+> Projeto Full Stack básico, ideal para treinar integração entre frontend e backend.
 
 ---
 
-## 💡 Funcionalidades
+## 🚀 Tecnologias utilizadas
 
-✔️ Identifica automaticamente o tipo de arquivo por extensão  
-✔️ Cria subpastas como "Imagens", "Documentos", "Vídeos", etc  
-✔️ Move os arquivos para suas respectivas categorias  
-✔️ Interface de terminal com barra de progresso (usando `rich`)  
-✔️ Pode ser usado em qualquer sistema operacional  
+- 🐍 Python 3
+- 🔥 Flask
+- 🌐 HTML5 + CSS3 + JavaScript
+- 🎨 Rich (para logs bonitos no terminal)
+- 🧠 VSCode + Live Server
+- 📦 Flask-CORS (para integração segura)
 
 ---
 
-## 🚀 Como usar
+## 🧩 Funcionalidades
+
+- Organiza arquivos automaticamente com base nas extensões
+- Cria subpastas como "Imagens", "Documentos", "Planilhas", etc.
+- Interface web para digitar o caminho da pasta
+- Integração com backend Python via `fetch()`
+- Feedback visual no navegador e no terminal
+
+---
+
+## 💻 Como executar o projeto
 
 ### 1. Clone o repositório
 
@@ -29,8 +36,37 @@ Organizador de arquivos feito em **Python**, que separa automaticamente os docum
 git clone https://github.com/seu-usuario/document-organizer.git
 cd document-organizer
 ```
+### 2. Crie um ambiente virtual e ative
+
+```bash
+python -m venv venv
+# Windows
+venv\Scripts\activate
+# Linux/Mac
+source venv/bin/activate
+```
+
+### 3. Instale as dependêcias
+
+```bash
+pip install flask flask-cors rich
+```
+
+### 4. Rode o backend
+
+```bash
+cd backend
+python app.py
+```
+
+### 5. Rode o frontend
+
+```bash
+Abra o frontend/index.html com Live Server ou manualmente no navegador.
+```
 
 
+---
 # 📂 Exemplo de organização
 
 Antes de rodar:
