@@ -1,27 +1,44 @@
-from flask import Flask, request, jsonify
-from flask_cors import CORS
-from organizer import organize_folder, TIPOS_DE_ARQUIVOS
-import os
+from flask import Flask, render_template, request, jsonify
+import organizer
+import webbrowser
+import threading
 
 # Cria a instância da aplicação Flask.
 app = Flask(__name__)
-CORS(app)
 
+@app.route('/')
+def index():
+    return render_template('index.html')
+    
 @app.route("/organizar", methods=["POST"])
 def organizar():
     data = request.get_json()
     caminho = data.get("caminho")
 
-# Verificação do caminho
-    if not caminho or not os.path.exists(caminho):
-        return jsonify({"erro": "Caminho inválido ou não encontrado"}), 400
-    
-    try:
-        organize_folder(caminho, TIPOS_DE_ARQUIVOS)
-        return jsonify({"mensagem": "Organização concluida com sucesso!"}), 200
-    except Exception as e:
-        return jsonify({"erro": str(e)}), 500
+    tipos_dict = {
+        "Imagens": [".jpg", ".jpeg", ".png", ".gif", ".bmp"],
+        "Documentos": [".pdf", ".docx", ".txt", ".doc", ".odt"],
+        "Planilhas": [".xlsx", ".xls", ".csv"],
+        "Apresentações": [".pptx", ".ppt"],
+        "Vídeos": [".mp4", ".mov", ".avi", ".mkv"],   
+        "Áudios": [".mp3", ".wav", ".ogg"],
+        "Compactados": [".zip", ".rar", ".7z", ".tar"],
+        "Executáveis": [".exe", ".msi", ".bat", ".sh", ".apk"],
+        "Outros": []
+    }
+
+    if caminho:
+        try:
+            resultado = organizer.organize_folder(caminho, tipos_dict)
+            return jsonify({'mensagem': resultado})
+        except Exception as e:
+            return jsonify({'erro': f'Erro ao organizar: {str(e)}'}), 500
+    return jsonify({'erro': 'Caminho não fornecido'}), 400
+
+def abrir_navegador():
+    webbrowser.open_new("http://127.0.0.1:5000/")
     
 # Inicia a aplicação flask se eu rodar o arquivo diretamente
 if __name__=="__main__":
-    app.run(debug=True)
+    threading.Timer(1, abrir_navegador).start()
+    app.run(debug=True, use_reloader=False)

@@ -28,8 +28,8 @@ function organizar() {
           mensagem.style.color = "red";
         }
       })
-      .catch((erro) => {
-        mensagem.innerText = "❌ Erro ao conectar com o servidor.";
-        mensagem.style.color = "red";
-      });
-    }
+      .catch(error => {
+        console.error("Erro:", error);
+        document.getElementById("mensagem").innerText = "Erro ao organizar os arquivos.";
+    });
+  }

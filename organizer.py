@@ -17,33 +17,29 @@ TIPOS_DE_ARQUIVOS = {
     "Outros": []
 }
 
-#Categoria -> nome da pasta onde vai conter a extensão. Usa lista para iterar entre as extensoes e selecionar a categoria baseado na extensao
 def obter_categoria(extensao): 
     for categoria, extensoes in TIPOS_DE_ARQUIVOS.items():  
         if extensao.lower().strip() in extensoes:   
             return categoria 
     return "Outros..."       
 
-#Função que irá receber o caminho da pasta
 def organize_folder(caminho, tipos_dict): 
     for item in track(os.listdir(caminho), description="[bold yellow]Organizando documentos...[/bold yellow]"):
         item_path = os.path.join(caminho, item) 
         arquivos = os.listdir(caminho)
 
-#Organiza os itens no caminhio fornecido, filtrando, separando, descobrindo e movendo
         if os.path.isfile(item_path):
             _, extensao = os.path.splitext(item)
             categoria = obter_categoria(extensao) 
             pasta_destino = os.path.join(caminho, categoria) 
 
- #Essa condição vai criar a pasta caso ela ainda não exista
-        if not os.path.exists(pasta_destino):
-            os.makedirs(pasta_destino)  
+            if not os.path.exists(pasta_destino):
+                os.makedirs(pasta_destino)  
+            novo_caminho = os.path.join(pasta_destino, item) 
 
-#Cria o novo caminho completo onde o arquivo vai ficar após ser movido
-        novo_caminho = os.path.join(pasta_destino, item) 
+            shutil.move(item_path, novo_caminho) 
+    return "Arquivos organizados com sucesso!"
 
-#Move o arquivo para a pasta correta
-        shutil.move(item_path, novo_caminho) 
+            
 
 
