@@ -52,19 +52,12 @@ source venv/bin/activate
 pip install flask flask-cors rich
 ```
 
-### 4. Rode o backend
+### 4. Rode o backend e o front abrirá automaticamente
 
 ```bash
 cd backend
 python app.py
 ```
-
-### 5. Rode o frontend
-
-```bash
-Abra o frontend/index.html com Live Server ou manualmente no navegador.
-```
-
 
 ---
 # 📂 Exemplo de organização
